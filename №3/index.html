@@ -1,0 +1,41 @@
+                                            <!-- Вариант №1
+            Напишите скрипт который при клике на кнопку “watch video” в созданный заранее блок помещает тег видео, 
+            проигрывание видео (любого) начинается автоматически. При смене языка на русский в теге select (по умолчанию язык английский), 
+            все созданные на странице тексты (5 тегов <p> с «рыбой») меняются на русский перевод. -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Практическая №3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="video"></div>
+        <button id="startVideoButton">Watch video</button>
+    <hr>
+
+    <select id="langSelect"> 
+        <option value="en" selected="selected">English</option>
+        <option value="ru">Русский</option>
+    </select>
+
+    <div id="enText">
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis ratione, dignissimos dolorum mollitia in repellendus illo officiis praesentium porro consequuntur. Quos cumque consequatur laborum, maiores nobis atque quo praesentium. Eum. </p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis ratione, dignissimos dolorum mollitia in repellendus illo officiis praesentium porro consequuntur. Quos cumque consequatur laborum, maiores nobis atque quo praesentium. Eum. </p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis ratione, dignissimos dolorum mollitia in repellendus illo officiis praesentium porro consequuntur. Quos cumque consequatur laborum, maiores nobis atque quo praesentium. Eum. </p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis ratione, dignissimos dolorum mollitia in repellendus illo officiis praesentium porro consequuntur. Quos cumque consequatur laborum, maiores nobis atque quo praesentium. Eum. </p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis ratione, dignissimos dolorum mollitia in repellendus illo officiis praesentium porro consequuntur. Quos cumque consequatur laborum, maiores nobis atque quo praesentium. Eum. </p>
+    </div>
+
+    <div id="ruText">
+        <p>Повседневная практика показывает, что постоянное информационно-пропагандистское обеспечение нашей деятельности способствует подготовки и реализации направлений прогрессивного развития. Повседневная практика показывает, что рамки и место обучения кадров в значительной степени обуславливает создание системы обучения кадров, соответствует насущным потребностям. Не следует, однако забывать, что начало повседневной работы по формированию позиции способствует подготовки и реализации систем массового участия. Разнообразный и богатый опыт начало повседневной работы по формированию позиции представляет собой интересный эксперимент проверки позиций, занимаемых участниками в отношении поставленных задач. Разнообразный и богатый опыт постоянное информационно-пропагандистское обеспечение нашей деятельности позволяет оценить значение новых предложений. Разнообразный и богатый опыт сложившаяся структура организации требуют определения и уточнения позиций, занимаемых участниками в отношении поставленных задач. </p>
+        <p>Не следует, однако забывать, что новая модель организационной деятельности в значительной степени обуславливает создание форм развития. Задача организации, в особенности же рамки и место обучения кадров требуют определения и уточнения направлений прогрессивного развития. Товарищи! рамки и место обучения кадров представляет собой интересный эксперимент проверки модели развития.</p>
+        <p>Равным образом новая модель организационной деятельности влечет за собой процесс внедрения и модернизации модели развития. С другой стороны консультация с широким активом требуют определения и уточнения форм развития. Задача организации, в особенности же постоянный количественный рост и сфера нашей активности позволяет выполнять важные задания по разработке позиций, занимаемых участниками в отношении поставленных задач. Задача организации, в особенности же новая модель организационной деятельности требуют от нас анализа существенных финансовых и административных условий. Идейные соображения высшего порядка, а также реализация намеченных плановых заданий обеспечивает широкому кругу (специалистов) участие в формировании направлений прогрессивного развития.</p>
+        <p>Задача организации, в особенности же консультация с широким активом в значительной степени обуславливает создание новых предложений. Таким образом постоянное информационно-пропагандистское обеспечение нашей деятельности позволяет выполнять важные задания по разработке дальнейших направлений развития.</p>
+        <p>Таким образом дальнейшее развитие различных форм деятельности способствует подготовки и реализации модели развития. Таким образом дальнейшее развитие различных форм деятельности способствует подготовки и реализации системы обучения кадров, соответствует насущным потребностям. Товарищи! консультация с широким активом позволяет выполнять важные задания по разработке направлений прогрессивного развития.</p>
+    </div>  
+
+</body>
+<script src="script.js"></script>
+</html>
