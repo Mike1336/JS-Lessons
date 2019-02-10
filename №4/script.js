@@ -24,13 +24,13 @@ let hs = document.getElementsByClassName('headers');
         let reclick=false;
             changeLink.addEventListener('click', ()=>{
                 
-                if (reclick) {
+                if (!reclick) {
                     hs[i].classList.add('courier');
                 }
                 else
                 {
                     hs[i].classList.remove('courier');
                 }
-            reclick =! reclick;
+            reclick = !reclick;
             });
     }
