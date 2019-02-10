@@ -1,0 +1,24 @@
+                                                            <!-- Вариант №1
+Напишите скрипт, который при клике на ссылку "learn more", под ней или справа открывает текст с описанием, после этого, данная ссылка становится не активна (использовать делегирование). 
+При нажатии на ссылку change text, все заголовки становятся курсивом, при повторном возвращаются в обратное состояние. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Практическая №4</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="javascript:void(0)" id="moreLink" class="active">Learn more</a>
+    <p id="more"></p>   
+    <hr>
+    <h1 class="headers">Заголовок 1</h1>
+    <h2 class="headers">Заголовок 2</h2>
+    <h3 class="headers">Заголовок 3</h3>
+    <h4 class="headers">Заголовок 4</h4>
+    <h5 class="headers">Заголовок 5</h5>
+    <h6 class="headers">Заголовок 6</h6>
+<a href="javascript:void(0)" id="changeLink" class="active">Change text</a>
+</body>
+<script src="script.js"></script>
+</html>

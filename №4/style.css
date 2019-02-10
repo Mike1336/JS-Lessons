@@ -1,0 +1,19 @@
+a{
+    text-decoration: none;
+    position: relative;
+    left: 50%;
+}
+
+.active:hover{
+    transition: .3s;
+    text-decoration: underline;
+    color: rgb(85, 167, 3);
+}
+
+hr{
+    margin: 0 20px 0 20px;
+}
+
+.courier{
+    font-style: italic;
+}
