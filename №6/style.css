@@ -47,13 +47,9 @@ header button:before {
 }
 #content{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
- .h3-center{
-   margin-left: 50%;
-   transform: translate(-50%,0);
- }
  .movieSection {
   position: relative;
   margin: 10px 10px;

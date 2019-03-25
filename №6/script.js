@@ -77,22 +77,29 @@ const getMovie = (url) => {
             }
 
             document.getElementById('content').appendChild(movieDiv);
-            movieDiv.appendChild(imgMovieDiv);
-            imgMovieDiv.appendChild(img);
-            imgMovieDiv.appendChild(movieDescDiv);
-            movieDescDiv.appendChild(descTextDiv);
-            descTextDiv.appendChild(mainDescH2);
-            mainDescH2.appendChild(mainDescSpan);
+              movieDiv.appendChild(imgMovieDiv);
+                imgMovieDiv.appendChild(img);
+                  imgMovieDiv.appendChild(movieDescDiv);
+                    movieDescDiv.appendChild(descTextDiv);
+                      descTextDiv.appendChild(mainDescH2);
+                       mainDescH2.appendChild(mainDescSpan);
           }
         }
       }
     })
     .catch((err) => {
-        clearFilms();
-        let not_found_h4 = document.createElement('h3');
-        not_found_h4.setAttribute('class', 'h3-center');
-        not_found_h4.innerText = 'Фильм "' + query.value + '" не найден!';
-        document.getElementById('content').appendChild(not_found_h4);
+        if (query.value!="") {
+          clearFilms();
+          let not_found_h4 = document.createElement('h3');
+          not_found_h4.innerText = 'Фильм "' + query.value + '" не найден!';
+          document.getElementById('content').appendChild(not_found_h4);  
+        }
+        else{
+          clearFilms();
+          let not_found_h4 = document.createElement('h3');
+          not_found_h4.innerText = 'Впишите название фильма в поле выше.';
+          document.getElementById('content').appendChild(not_found_h4);  
+        }
     })
 }
 
