@@ -30,30 +30,41 @@ const getMovie = async (url) => {
   let response = await fetch(url);
   let film = await response.json();
 
-  const moviePoster = new Image();
-  const movieTitle = document.createElement('h1');
+  const filmPoster = document.createElement('div');
+  filmPoster.setAttribute('class', 'poster');
 
-  if (!film.Poster ||film.Poster == 'N/A') {
+  const movieImg = new Image();
+  const movieTitle = document.createElement('h1');
+  const starIcon = document.createElement('span');
+
+  if (localStorage.getItem(film.imdbID)) {
+    starIcon.setAttribute('class', 'fa fa-star icon')
+  } else {
+    starIcon.setAttribute('class', 'fa fa-star-o icon');
+  }
+
+  if (!film.Poster || film.Poster == 'N/A') {
     movieTitle.innerText = film.Title + ' ( !!! Постер отсутствует !!! )';
 
   } else {
-    moviePoster.src = film.Poster;
+    movieImg.src = film.Poster;
     movieTitle.innerText = film.Title;
   }
-  
-  filmInfo.appendChild(moviePoster);
+  filmInfo.appendChild(filmPoster);
+  filmPoster.appendChild(starIcon);
+  filmPoster.appendChild(movieImg);
   filmInfo.appendChild(movieTitle);
 
   if (film.Released) {
     const movieRelease = document.createElement('h2');
-    movieRelease.innerText = 'Дата выхода: '+film.Released;
+    movieRelease.innerText = 'Дата выхода: ' + film.Released;
     filmInfo.appendChild(movieRelease);
   }
 
 
   if (film.Runtime) {
     const movieDuration = document.createElement('h3');
-    movieDuration.innerText = 'Длительность: '+film.Runtime;
+    movieDuration.innerText = 'Длительность: ' + film.Runtime;
     filmInfo.appendChild(movieDuration);
 
   }
@@ -61,7 +72,7 @@ const getMovie = async (url) => {
 
   if (film.Genre) {
     const movieGenre = document.createElement('h4');
-    movieGenre.innerText = 'Жанр: '+film.Genre;
+    movieGenre.innerText = 'Жанр: ' + film.Genre;
     filmInfo.appendChild(movieGenre);
 
   }
@@ -71,15 +82,25 @@ const getMovie = async (url) => {
     const movieBudget = document.createElement('h5');
     movieBudget.innerText = 'Бюджет: ';
 
-    if (film.BoxOffice !='N/A') {
+    if (film.BoxOffice != 'N/A') {
       movieBudget.innerText += film.BoxOffice;
-  
-    }else{
+
+    } else {
       movieBudget.innerText += 'Неизвестно';
     }
     filmInfo.appendChild(movieBudget);
   }
   console.log(film);
+
+  starIcon.addEventListener('click', () => {
+    if (localStorage.getItem(film.imdbID)) {
+      localStorage.removeItem(film.imdbID)
+      starIcon.setAttribute('class', 'fa fa-star-o icon')
+    } else {
+      localStorage.setItem(film.imdbID, "true");
+      starIcon.setAttribute('class', 'fa fa-star icon');
+    }
+  });
 }
 
 const getMovies = async (url) => {
@@ -109,7 +130,7 @@ const getMovies = async (url) => {
 
           const movieDescDiv = document.createElement('div');
           movieDescDiv.setAttribute('class', 'movieDescription');
-          movieDescDiv.setAttribute('id', i);
+          movieDescDiv.setAttribute('id', films.Search[i].imdbID);
 
           const descTextDiv = document.createElement('div');
           descTextDiv.setAttribute('class', 'text');
@@ -123,17 +144,16 @@ const getMovies = async (url) => {
 
           if (films.Search[i].Poster == 'N/A') {
             img.src = 'images/not_found.jpg';
-          }
-          else {
+          } else {
             img.src = films.Search[i].Poster;
           }
 
           document.getElementById('content').appendChild(movieDiv);
           movieDiv.appendChild(imgMovieDiv);
+          imgMovieDiv.appendChild(starIcon);
           imgMovieDiv.appendChild(img);
           imgMovieDiv.appendChild(movieDescDiv);
           movieDescDiv.appendChild(descTextDiv);
-          movieDescDiv.appendChild(starIcon);
           descTextDiv.appendChild(mainDescH2);
           mainDescH2.appendChild(mainDescSpan);
 
@@ -149,15 +169,13 @@ const getMovies = async (url) => {
         }
       }
     }
-  }
-  catch (err) {
+  } catch (err) {
     if (query.value != "") {
       clearBlock('films');
       let not_found_h4 = document.createElement('h3');
       not_found_h4.innerText = 'Фильм "' + query.value + '" не найден!';
       document.getElementById('content').appendChild(not_found_h4);
-    }
-    else {
+    } else {
       clearBlock('films');
       let not_found_h4 = document.createElement('h3');
       not_found_h4.innerText = 'Впишите название фильма в поле выше.';
@@ -176,29 +194,36 @@ search_button.addEventListener('click', () => {
   getMovies('http://www.omdbapi.com/?s=' + ((query.value.toLowerCase()).replace(' ', '+')) + '&apikey=d5677312');
 });
 
+let userScroll;
+
 movie_place.addEventListener('click', (e) => {
 
   clearBlock('film');
 
-
   let target = e.target;
-  if (target.className == "movieDescription") {
+  if (target.className == "movieImg" || target.className == "movieDescription") {
     if (target.className != "fa fa-star icon" || target.className != "fa fa-star-o icon") {
-      
+
+      userScroll = document.documentElement.scrollTop;
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+
       filmList.classList.add('hide');
       filmInfo.classList.remove('hide');
       header.appendChild(backIcon);
       backIcon.classList.remove('hide');
-    
+
       contentSection.appendChild(filmInfo);
-    
-      let film_name = target.querySelector('.text h2 span').innerText;
-      getMovie('http://www.omdbapi.com/?t=' + film_name.toLowerCase() + '&apikey=d5677312');
+      getMovie('http://www.omdbapi.com/?i=' + target.id + '&apikey=d5677312');
     }
   }
 });
 
 backIcon.addEventListener('click', () => {
+  document.body.scrollTop = document.documentElement.scrollTop = userScroll;
+
+  clearBlock('films');
+  getMovies('http://www.omdbapi.com/?s=' + ((query.value.toLowerCase()).replace(' ', '+')) + '&apikey=d5677312');
+
   filmList.classList.remove('hide');
   filmInfo.classList.add('hide');
   backIcon.classList.add('hide');

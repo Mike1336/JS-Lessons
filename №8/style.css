@@ -151,8 +151,7 @@ header button:before {
   transform: scale(1, 0);
 }
 
-.movieSection:hover .movieDescription::before, 
-.movieSection:hover .movieDescription::after {
+.movieSection:hover .movieDescription::before, .movieSection:hover .movieDescription::after {
   transform: scale(1, 1);
 }
 
@@ -160,8 +159,8 @@ header button:before {
   font-size: 3em !important;
   position: absolute;
   color: gold;
-  top: -10px;
-  right: -10px;
+  top: 0;
+  right: 0;
   z-index: 99;
 }
 
@@ -194,4 +193,8 @@ section {
 .hide {
   opacity: 0 !important;
   pointer-events: none;
+}
+
+.poster {
+  position: relative;
 }
