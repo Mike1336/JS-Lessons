@@ -29,7 +29,9 @@ const clearBlock = (block) => {
 const getMovie = async (url) => {
   let response = await fetch(url);
   let film = await response.json();
-
+  let filmId = film.imdbID
+  filmId = filmId.replace(' ', '');
+  
   const filmPoster = document.createElement('div');
   filmPoster.setAttribute('class', 'poster');
 
@@ -37,7 +39,7 @@ const getMovie = async (url) => {
   const movieTitle = document.createElement('h1');
   const starIcon = document.createElement('span');
 
-  if (localStorage.getItem(film.imdbID)) {
+  if (localStorage.getItem(filmId)) {
     starIcon.setAttribute('class', 'fa fa-star icon')
   } else {
     starIcon.setAttribute('class', 'fa fa-star-o icon');
@@ -93,11 +95,11 @@ const getMovie = async (url) => {
   console.log(film);
 
   starIcon.addEventListener('click', () => {
-    if (localStorage.getItem(film.imdbID)) {
-      localStorage.removeItem(film.imdbID)
+    if (localStorage.getItem(filmId)) {
+      localStorage.removeItem(filmId)
       starIcon.setAttribute('class', 'fa fa-star-o icon')
     } else {
-      localStorage.setItem(film.imdbID, "true");
+      localStorage.setItem(filmId, "true");
       starIcon.setAttribute('class', 'fa fa-star icon');
     }
   });
@@ -112,6 +114,9 @@ const getMovies = async (url) => {
       for (let i = 0; i < films.Search.length; i++) {
         if (films.Search[i].Title != 'N/A' && films.Search[i].Year != 'N/A') {
 
+          let filmId = films.Search[i].imdbID;
+          filmId = filmId.replace(' ','');
+
           const movieDiv = document.createElement('div');
           movieDiv.setAttribute('class', 'movieSection');
 
@@ -120,7 +125,7 @@ const getMovies = async (url) => {
 
           const starIcon = document.createElement('span');
 
-          if (localStorage.getItem(films.Search[i].imdbID)) {
+          if (localStorage.getItem(filmId)) {
             starIcon.setAttribute('class', 'fa fa-star icon')
           } else {
             starIcon.setAttribute('class', 'fa fa-star-o icon');
@@ -130,7 +135,7 @@ const getMovies = async (url) => {
 
           const movieDescDiv = document.createElement('div');
           movieDescDiv.setAttribute('class', 'movieDescription');
-          movieDescDiv.setAttribute('id', films.Search[i].imdbID);
+          movieDescDiv.setAttribute('id', filmId);
 
           const descTextDiv = document.createElement('div');
           descTextDiv.setAttribute('class', 'text');
@@ -158,11 +163,11 @@ const getMovies = async (url) => {
           mainDescH2.appendChild(mainDescSpan);
 
           starIcon.addEventListener('click', () => {
-            if (localStorage.getItem(films.Search[i].imdbID)) {
-              localStorage.removeItem(films.Search[i].imdbID)
+            if (localStorage.getItem(filmId)) {
+              localStorage.removeItem(filmId)
               starIcon.setAttribute('class', 'fa fa-star-o icon')
             } else {
-              localStorage.setItem(films.Search[i].imdbID, "true");
+              localStorage.setItem(filmId, "true");
               starIcon.setAttribute('class', 'fa fa-star icon');
             }
           });
@@ -213,7 +218,7 @@ movie_place.addEventListener('click', (e) => {
       backIcon.classList.remove('hide');
 
       contentSection.appendChild(filmInfo);
-      getMovie('http://www.omdbapi.com/?i=' + target.id + '&apikey=d5677312');
+      getMovie('http://www.omdbapi.com/?i=' + (target.id).replace(' ', '') + '&apikey=d5677312');
     }
   }
 });
